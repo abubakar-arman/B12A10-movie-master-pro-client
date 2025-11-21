@@ -15,7 +15,7 @@ const Hero = () => {
     const [movies, setMovies] = useState([])
     // const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
-        console.log(2222);
+        // console.log(2222);
         const fetchData = async () => {
             // setIsLoading(true)
             const res = await fetch('http://localhost:3000/movies/featured')
