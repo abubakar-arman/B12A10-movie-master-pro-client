@@ -1,17 +1,16 @@
 import React from 'react';
 import { FaStar } from 'react-icons/fa6';
 
-const TopRatedMovies = ({ movies }) => {
+const LatestMovies = ({ movies }) => {
     // console.log(movies);
-    const topRatedMovies = movies.sort((a, b) => b.rating - a.rating).slice(0, 5)
-    // console.log('top', topRatedMovies)
+    const latestMovies = movies.sort((a, b) => b.releaseYear - a.releaseYear).slice(0, 6)
 
     return (
         <div className='mt-10 mb-10 text-center'>
-            <h3 className='text-3xl font-bold text-accent-content mb-5'>Top Rated</h3>
+            <h3 className='text-3xl font-bold text-accent-content mb-5'>Latest</h3>
             <div className="cards flex gap-8 px-20">
                 {
-                    topRatedMovies.map((movie, i) => (
+                    latestMovies.map((movie, i) => (
                         <div key={i} className="card bg-base-100 w-72 shadow-sm">
                             <figure className='relative overflow-hidden rounded-lg group'>
                                 <img
@@ -52,4 +51,4 @@ const TopRatedMovies = ({ movies }) => {
     );
 };
 
-export default TopRatedMovies;
+export default LatestMovies;

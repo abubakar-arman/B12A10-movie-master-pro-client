@@ -3,6 +3,7 @@ import Hero from '../components/Hero'
 import Stats from '../components/Stats';
 import { useLoaderData } from 'react-router';
 import TopRatedMovies from '../components/TopRatedMovies';
+import LatestMovies from '../components/LatestMovies';
 
 const Home = () => {
     const movies = useLoaderData()
@@ -13,6 +14,7 @@ const Home = () => {
             <Hero />
             <Stats movies={movies} />
             <TopRatedMovies movies={movies} />
+            <LatestMovies movies={movies} />
         </div>
     );
 };
