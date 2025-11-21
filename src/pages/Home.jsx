@@ -4,6 +4,7 @@ import Stats from '../components/Stats';
 import { useLoaderData } from 'react-router';
 import TopRatedMovies from '../components/TopRatedMovies';
 import LatestMovies from '../components/LatestMovies';
+import GenreSection from '../components/GenreSection';
 
 const Home = () => {
     const movies = useLoaderData()
@@ -15,6 +16,7 @@ const Home = () => {
             <Stats movies={movies} />
             <TopRatedMovies movies={movies} />
             <LatestMovies movies={movies} />
+            <GenreSection />
         </div>
     );
 };
