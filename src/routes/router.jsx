@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         loader: () => fetch('http://localhost:3000/movies')
       },
       {
-        path: '/movieDetails/:id',
+        path: '/movie-details/:id',
         element:
           <MovieDetails />,
       },

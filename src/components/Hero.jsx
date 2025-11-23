@@ -9,13 +9,12 @@ import 'swiper/css/pagination';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { FaImdb } from 'react-icons/fa6';
-import { useNavigate } from 'react-router';
+import { Link } from 'react-router';
 
 
 const Hero = () => {
     const [movies, setMovies] = useState([])
     // const [isLoading, setIsLoading] = useState(true)
-    const navigate = useNavigate()
     useEffect(() => {
         // console.log(2222);
         const fetchData = async () => {
@@ -28,10 +27,6 @@ const Hero = () => {
         }
         fetchData()
     }, [])
-
-    const handleBtnClick = (id) => {
-        navigate('/movieDetails/' + id)
-    }
     return (
         <Swiper
             modules={[Autoplay, Navigation, Pagination]}
@@ -59,10 +54,10 @@ const Hero = () => {
                                 <p className="border-l-3 border-white pl-2 ml-4">{movie.director}</p>
                             </div>
                             <p className="">{movie.plotSummary}</p>
-                            <button
+                            <Link
+                                to={'/movie-details/'+movie._id}
                                 className="btn btn-warning w-fit px-10 py-8"
-                                onClick={() => handleBtnClick(movie._id)}
-                            >Watch Now</button>
+                            >Watch Now</Link>
                         </div>
                     </div>
                 </SwiperSlide>

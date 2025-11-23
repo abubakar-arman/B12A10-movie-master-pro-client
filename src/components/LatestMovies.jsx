@@ -8,7 +8,7 @@ const LatestMovies = ({ movies }) => {
     const navigate = useNavigate()
 
     const handleCardClick = (id) => {
-        navigate('/movieDetails/'+id)
+        navigate('/movie-details/'+id)
     }
 
     return (
