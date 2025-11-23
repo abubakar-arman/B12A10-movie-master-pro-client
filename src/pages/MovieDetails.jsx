@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { FaImdb } from 'react-icons/fa6';
-import { useParams } from 'react-router';
+import { Link, useParams } from 'react-router';
 
 const MovieDetails = () => {
     const {id} = useParams()
@@ -37,7 +37,7 @@ const MovieDetails = () => {
                     </div>
                     <button className='btn btn-primary w-fit'>Add to your list</button>
                     <div className='flex gap-5 mt-5'>
-                        <button className="btn btn-neutral">Edit</button>
+                        <Link to={'/update-movie/'+movie._id} className="btn btn-neutral">Update</Link>
                         <button className="btn btn-neutral">Delete</button>
                     </div>
                 </div>

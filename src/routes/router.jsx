@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import AllMovies from '../pages/AllMovies';
 import MovieDetails from '../pages/MovieDetails';
 import AddMovie from '../pages/AddMovie';
+import UpdateMovie from '../pages/UpdateMovie';
 
 const router = createBrowserRouter([
   {
@@ -25,12 +26,18 @@ const router = createBrowserRouter([
       {
         path: '/movieDetails/:id',
         element:
-        <MovieDetails />,
+          <MovieDetails />,
       },
       {
         path: '/add-movie',
         element:
-        <AddMovie />,
+          <AddMovie />,
+      },
+      {
+        path: '/update-movie/:id',
+        element:
+          <UpdateMovie />,
+        loader: ({params}) => fetch('http://localhost:3000/movies/'+params.id)
       }
     ]
   },
