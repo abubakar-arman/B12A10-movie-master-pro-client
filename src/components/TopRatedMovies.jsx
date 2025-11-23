@@ -1,10 +1,16 @@
 import React from 'react';
 import { FaStar } from 'react-icons/fa6';
+import { useNavigate } from 'react-router';
 
 const TopRatedMovies = ({ movies }) => {
     // console.log(movies);
     const topRatedMovies = movies.sort((a, b) => b.rating - a.rating).slice(0, 5)
     // console.log('top', topRatedMovies)
+    const navigate = useNavigate()
+
+    const handleCardClick = (id) => {
+        navigate('/movieDetails/'+id)
+    }
 
     return (
         <div className='mt-10 mb-10 text-center'>
@@ -12,7 +18,7 @@ const TopRatedMovies = ({ movies }) => {
             <div className="cards flex gap-8 px-20">
                 {
                     topRatedMovies.map((movie, i) => (
-                        <div key={i} className="card bg-base-100 w-72 shadow-sm">
+                        <div key={i} className="card bg-base-100 w-72 shadow-sm" onClick={() => handleCardClick(movie._id)}>
                             <figure className='relative overflow-hidden rounded-lg group'>
                                 <img
                                     src={'/posters/' + movie.posterUrl}

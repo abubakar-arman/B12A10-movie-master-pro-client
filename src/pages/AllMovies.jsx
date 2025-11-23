@@ -1,10 +1,15 @@
 import React from 'react';
 import { FaStar } from 'react-icons/fa6';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 
 const AllMovies = () => {
     const movies = useLoaderData()
     // console.log(movies);
+    const navigate = useNavigate()
+
+    const handleCardClick = (id) => {
+        navigate('/movieDetails/'+id)
+    }
 
     return (
         <div className='mt-10 mb-10 text-center'>
@@ -12,7 +17,7 @@ const AllMovies = () => {
             <div className="cards grid grid-cols-4 gap-10 px-20">
                 {
                     movies.map((movie, i) => (
-                        <div key={i} className="card bg-base-100 w-72 shadow-sm">
+                        <div onClick={() => handleCardClick(movie._id)} key={i} className="card bg-base-100 w-72 shadow-sm">
                             <figure className='relative overflow-hidden rounded-lg group'>
                                 <img
                                     src={'/posters/' + movie.posterUrl}
