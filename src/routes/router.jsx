@@ -3,6 +3,7 @@ import RootLayout from '../layouts/RootLayout';
 import Home from '../pages/Home';
 import AllMovies from '../pages/AllMovies';
 import MovieDetails from '../pages/MovieDetails';
+import AddMovie from '../pages/AddMovie';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,11 @@ const router = createBrowserRouter([
         path: '/movieDetails/:id',
         element:
         <MovieDetails />,
+      },
+      {
+        path: '/add-movie',
+        element:
+        <AddMovie />,
       }
     ]
   },

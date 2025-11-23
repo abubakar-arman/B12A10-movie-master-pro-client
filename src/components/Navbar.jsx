@@ -6,6 +6,7 @@ const Navbar = () => {
     const links = [
         { title: 'Home', url: '/' },
         { title: 'Movies', url: '/movies' },
+        { title: 'Add Movie', url: '/add-movie'},
         // { title: 'Register', url: '/register' },
         // { title: 'Login', url: '/login' },
     ]

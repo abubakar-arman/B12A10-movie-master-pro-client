@@ -6,3 +6,7 @@
 a.active {
   @apply text-red-700 border-b-4
 }
+
+.label {
+  @apply text-accent-content
+}

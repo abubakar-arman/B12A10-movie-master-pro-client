@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Outlet, ScrollRestoration } from 'react-router';
+import { Bounce, ToastContainer } from 'react-toastify'
 
 const RootLayout = () => {
     return (
@@ -10,6 +11,19 @@ const RootLayout = () => {
             <Navbar />
             <Outlet />
             <Footer />
+            <ToastContainer
+                position="top-right"
+                autoClose={4000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition={Bounce}
+            />
         </div>
     );
 };
