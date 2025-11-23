@@ -21,7 +21,7 @@ const Hero = () => {
             // setIsLoading(true)
             const res = await fetch('http://localhost:3000/movies/featured')
             const data = await res.json()
-            console.log(data);
+            // console.log(data);
             setMovies(data)
 
         }

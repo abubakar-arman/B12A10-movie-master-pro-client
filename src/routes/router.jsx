@@ -15,13 +15,13 @@ const router = createBrowserRouter([
         index: true,
         element:
           <Home />,
-        loader: () => fetch('http://localhost:3000/movies')
+        loader: () => fetch('/api/movies')
       },
       {
         path: '/movies',
         element:
           <AllMovies />,
-        loader: () => fetch('http://localhost:3000/movies')
+        loader: () => fetch('/api/movies')
       },
       {
         path: '/movie-details/:id',
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         path: '/update-movie/:id',
         element:
           <UpdateMovie />,
-        loader: ({params}) => fetch('http://localhost:3000/movies/'+params.id)
+        loader: ({params}) => fetch('/api/movies/'+params.id)
       }
     ]
   },

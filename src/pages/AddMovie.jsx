@@ -21,7 +21,7 @@ const AddMovie = () => {
             addedBy: 'aa@aa.com'
         }
         // console.log(formData);
-        fetch('http://localhost:3000/movies', {
+        fetch('/api/movies', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

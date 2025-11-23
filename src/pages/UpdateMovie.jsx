@@ -23,7 +23,7 @@ const UpdateMovie = () => {
             country: e.target.country.value,
         }
         // console.log(formData);
-        fetch('http://localhost:3000/movies/'+movie._id, {
+        fetch('/api/movies/'+movie._id, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
