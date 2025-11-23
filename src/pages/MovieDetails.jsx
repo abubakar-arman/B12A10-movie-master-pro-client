@@ -1,13 +1,17 @@
+import { useEffect } from 'react';
 import { FaImdb } from 'react-icons/fa6';
 import { Link, useLoaderData, useNavigate} from 'react-router';
 import Swal from 'sweetalert2';
 
 const MovieDetails = () => {
     const movie = useLoaderData()
-    
-    // console.log('kkj', movie);
-    // console.log('kk', typeof movie);
     const navigate = useNavigate()
+    
+    useEffect(() => {
+        if(!movie){
+            navigate('/movie-not-found')
+        }
+    }, [movie, navigate])
     
     // const { id } = useParams()
     // // console.log('id:', id);
