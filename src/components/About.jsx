@@ -10,75 +10,75 @@ const About = () => {
                 critically-acclaimed originals to independent films, foreign cinema, and
                 timeless classics. Our mission is to provide an unparalleled viewing
                 environment that respects the art of filmmaking.</p>
-            <div class="p-8">
+            <div className="p-8">
 
-                <div class="max-w-2xl mx-auto bg-base-300 p-8 rounded-xl shadow-2xl border border-gray-700 text-base-content/80">
-                    <h1 class="text-3xl font-extrabold mb-6 text-red-500 border-b-2 border-red-500 pb-2">
-                        <span class="text-primary">MovieMaster</span> Pro Features
+                <div className="max-w-2xl mx-auto bg-base-300 p-8 rounded-xl shadow-2xl border border-gray-700 text-base-content/80">
+                    <h1 className="text-3xl font-extrabold mb-6 text-red-500 border-b-2 border-red-500 pb-2">
+                        <span className="text-primary">MovieMaster</span> Pro Features
                     </h1>
-                    <p class="text-base-content/40 mb-6">A quick summary of the key benefits and features of the premium streaming service.</p>
+                    <p className="text-base-content/40 mb-6">A quick summary of the key benefits and features of the premium streaming service.</p>
 
-                    <ul class="space-y-4 list-none p-0">
-                        <li class="flex items-start">
-                            <span class="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
+                    <ul className="space-y-4 list-none p-0">
+                        <li className="flex items-start">
+                            <span className="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
                             <div>
-                                <strong class="text-primary">Core Content & Originals:</strong> Vast, curated library including Hollywood, Classics, Foreign Films, and high-budget <strong>MovieMaster Originals</strong>.
+                                <strong className="text-primary">Core Content & Originals:</strong> Vast, curated library including Hollywood, Classics, Foreign Films, and high-budget <strong>MovieMaster Originals</strong>.
                             </div>
                         </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
+                        <li className="flex items-start">
+                            <span className="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
                             <div>
-                                <strong class="text-primary">High Fidelity:</strong> Standard <strong>4K Ultra HD</strong> with <strong>HDR/Dolby Vision</strong> video and premium <strong>Dolby Atmos</strong> audio support.
-                            </div>
-                        </li>
-
-                        <li class="flex items-start">
-                            <span class="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
-                            <div>
-                                <strong class="text-primary">Ad-Free Viewing:</strong> A commitment to a <strong>100% Ad-Free</strong> and immersive experience.
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
-                            <div>
-                                <strong class="text-primary">Offline Access:</strong> <strong>Offline Downloads</strong> available for mobile devices.
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
-                            <div>
-                                <strong class="text-primary">Multi-Device Support:</strong> Apps for Smart TVs, Consoles, Web, and Mobile.
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
-                            <div>
-                                <strong class="text-primary">Sharing & Streams:</strong> Up to <strong>4 Simultaneous Streams</strong> per account.
+                                <strong className="text-primary">High Fidelity:</strong> Standard <strong>4K Ultra HD</strong> with <strong>HDR/Dolby Vision</strong> video and premium <strong>Dolby Atmos</strong> audio support.
                             </div>
                         </li>
 
-                        <li class="flex items-start">
-                            <span class="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
+                        <li className="flex items-start">
+                            <span className="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
                             <div>
-                                <strong class="text-primary">Pro-Files:</strong> Up to 6 personalized <strong>User Profiles</strong> with unique, advanced recommendations.
+                                <strong className="text-primary">Ad-Free Viewing:</strong> A commitment to a <strong>100% Ad-Free</strong> and immersive experience.
                             </div>
                         </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
+                        <li className="flex items-start">
+                            <span className="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
                             <div>
-                                <strong class="text-primary">Deep Dive Extras:</strong> Exclusive access to <strong>Director's Commentary, Making-of, and Deleted Scenes</strong>.
+                                <strong className="text-primary">Offline Access:</strong> <strong>Offline Downloads</strong> available for mobile devices.
                             </div>
                         </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
+                        <li className="flex items-start">
+                            <span className="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
                             <div>
-                                <strong class="text-primary">Film School Mode:</strong> Optional toggle for on-screen trivia and film analysis while watching.
+                                <strong className="text-primary">Multi-Device Support:</strong> Apps for Smart TVs, Consoles, Web, and Mobile.
                             </div>
                         </li>
-                        <li class="flex items-start">
-                            <span class="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
+                        <li className="flex items-start">
+                            <span className="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
                             <div>
-                                <strong class="text-primary">Master Vault:</strong> Dedicated section for restored classic and rare cinema.
+                                <strong className="text-primary">Sharing & Streams:</strong> Up to <strong>4 Simultaneous Streams</strong> per account.
+                            </div>
+                        </li>
+
+                        <li className="flex items-start">
+                            <span className="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
+                            <div>
+                                <strong className="text-primary">Pro-Files:</strong> Up to 6 personalized <strong>User Profiles</strong> with unique, advanced recommendations.
+                            </div>
+                        </li>
+                        <li className="flex items-start">
+                            <span className="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
+                            <div>
+                                <strong className="text-primary">Deep Dive Extras:</strong> Exclusive access to <strong>Director's Commentary, Making-of, and Deleted Scenes</strong>.
+                            </div>
+                        </li>
+                        <li className="flex items-start">
+                            <span className="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
+                            <div>
+                                <strong className="text-primary">Film School Mode:</strong> Optional toggle for on-screen trivia and film analysis while watching.
+                            </div>
+                        </li>
+                        <li className="flex items-start">
+                            <span className="text-red-500 text-xl mr-3 leading-none">&#9733;</span>
+                            <div>
+                                <strong className="text-primary">Master Vault:</strong> Dedicated section for restored classic and rare cinema.
                             </div>
                         </li>
                     </ul>
