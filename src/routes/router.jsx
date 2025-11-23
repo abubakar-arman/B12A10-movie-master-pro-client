@@ -27,6 +27,7 @@ const router = createBrowserRouter([
         path: '/movie-details/:id',
         element:
           <MovieDetails />,
+        loader: ({params}) => fetch('/api/movies/'+params.id)
       },
       {
         path: '/add-movie',
