@@ -1,27 +1,33 @@
 import { Link } from 'react-router';
-import popcorn from '../assets/popcorn.png'
-import { toast } from 'react-toastify';
-import { emailRegex, passwordRegex } from '../lib/utils';
+import film from '../assets/film.png'
 import { useState } from 'react';
+import { emailRegex, passwordRegex } from '../lib/utils';
+import { toast } from 'react-toastify';
 
-const Login = () => {
+const Register = () => {
+    // const { signup, user, loginWithGoogle } = useAuth()
+    // const navigate = useNavigate()
     const [error, setError] = useState(null)
-    
-    
-        const errText = (`Enter a valid password:
-        - Must have an Uppercase letter in the password 
-        - Must have a Lowercase letter in the password  
-        - Length must be at least 6 character 
-        `)
 
-    const handleEmailLogin = async (e) => {
+
+    const errText = (`Enter a valid password:
+    - Must have an Uppercase letter in the password 
+    - Must have a Lowercase letter in the password  
+    - Length must be at least 6 character 
+    `)
+
+    const handleRegister = async (e) => {
         e.preventDefault()
+
         setError(null)
 
-        const email = e.target.email.value 
-        const password = e.target.password.value || null 
+        const email = e.target.email.value
+        const password = e.target.password.value
+        const name = e.target.name.value
+        const photoUrl = e.target.photoUrl.value
+        // console.log(email);
 
-        if (!email || !password) {
+        if (!email || !password || !name || !photoUrl) {
             toast.error('Fill in the form correctly')
             return
         }
@@ -33,29 +39,44 @@ const Login = () => {
             setError(errText)
             return
         }
-        // toast('pass')
 
+        // try {
+        //     await signup(email, password, name, photoUrl)
+        //     // toast.success('Account created successfully')
+        //     navigate('/')
+        // } catch (err) {
+        //     if(err.code === 'auth/email-already-in-use'){
+        //         toast.error('Email is already in use')
+        //         return
+        //     }
+        //     toast.error('Incorrect information')
+        //     // console.log(err.code)
+        // }
     }
     return (
         <div className="min-h-[calc(100vh-90px)]">
-            <h1 className="text-5xl font-bold text-center text-primary mt-10 mb-8">Login now!</h1>
+            <h1 className="text-5xl font-bold text-center text-primary mt-10 mb-8">Register now!</h1>
             <div className="hero bg-base-200">
                 <div className="hero-content flex-col lg:flex-row">
                     <div className="text-center lg:text-left ">
-                        <img src={popcorn} className='w-lg' alt="" />
+                        <img src={film} className='w-lg' alt="" />
                     </div>
                     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                         <div className="card-body">
-                            <form onSubmit={handleEmailLogin}>
+                            <form onSubmit={handleRegister}>
                                 <fieldset className="fieldset">
+                                    <label className="label">Name</label>
+                                    <input type="text" className="input" name='name' placeholder="Arman" />
                                     <label className="label">Email</label>
-                                    <input type="email" className="input" name='email' placeholder="Email" />
+                                    <input type="email" className="input" name='email' placeholder="abc@gmail.com" />
                                     <label className="label">Password</label>
                                     <input type="password" className="input" name='password' placeholder="Password" />
                                     {error && <p className="text-red-600">* Choose a strong password of at least 6 characters with upper and lower case letters</p>}
-                                    <div><Link to='/recover-password' className="link link-hover">Forgot password?</Link></div>
-                                    <button className="btn btn-primary mt-4">Login</button>
+                                    <label className="label">Photo URL</label>
+                                    <input type="text" className="input" name='photoUrl' placeholder="abc.jpg" />
+                                    <button className="btn btn-primary mt-4">Register</button>
                                     {/* Google */}
+                                    
                                 </fieldset>
                             </form>
                             <button className="btn bg-white text-black border-[#e5e5e5] mt-2">
@@ -70,9 +91,10 @@ const Login = () => {
                                         </path><path fill="#ea4335"
                                             d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55">
                                         </path></g></svg>
-                                Login with Google
+                                Register with Google
                             </button>
-                            <div className='mt-2'>Don't have an account? <Link to='/register' className="link link-hover text-primary">Register Now.</Link></div>
+                            <div className='mt-2'>
+                                        Already have an account? <Link to='/login' className="link link-hover text-primary">Login Now.</Link></div>
                         </div>
                     </div>
                 </div>
@@ -81,4 +103,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
