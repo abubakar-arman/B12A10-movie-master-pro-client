@@ -7,8 +7,8 @@ const Navbar = () => {
         { title: 'Home', url: '/' },
         { title: 'Movies', url: '/movies' },
         { title: 'Add Movie', url: '/add-movie'},
-        // { title: 'Register', url: '/register' },
-        // { title: 'Login', url: '/login' },
+        { title: 'Login', url: '/login' },
+        { title: 'Register', url: '/register' },
     ]
 
     return (

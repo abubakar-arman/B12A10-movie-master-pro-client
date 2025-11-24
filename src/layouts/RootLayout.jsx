@@ -9,7 +9,9 @@ const RootLayout = () => {
         <div className='bg-base-200'>
             <ScrollRestoration />
             <Navbar />
-            <Outlet />
+            <main>
+                <Outlet />
+            </main>
             <Footer />
             <ToastContainer
                 position="top-right"

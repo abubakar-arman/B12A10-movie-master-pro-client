@@ -6,6 +6,7 @@ import MovieDetails from '../pages/MovieDetails';
 import AddMovie from '../pages/AddMovie';
 import UpdateMovie from '../pages/UpdateMovie';
 import NotFound from '../pages/NotFound';
+import Login from '../pages/Login';
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
         path: '/movie-details/:id',
         element:
           <MovieDetails />,
-        loader: ({params}) => fetch('/api/movies/'+params.id)
+        loader: ({ params }) => fetch('/api/movies/' + params.id)
       },
       {
         path: '/add-movie',
@@ -39,12 +40,17 @@ const router = createBrowserRouter([
         path: '/update-movie/:id',
         element:
           <UpdateMovie />,
-        loader: ({params}) => fetch('/api/movies/'+params.id)
+        loader: ({ params }) => fetch('/api/movies/' + params.id)
+      },
+      {
+        path: '/login',
+        element:
+          <Login />
       },
       {
         path: '/*',
         element:
-        <NotFound />
+          <NotFound />
       }
     ]
   },
