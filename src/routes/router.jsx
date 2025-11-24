@@ -8,6 +8,7 @@ import UpdateMovie from '../pages/UpdateMovie';
 import NotFound from '../pages/NotFound';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import ProtectedRoute from './ProtectedRoutes';
 
 const router = createBrowserRouter([
   {
@@ -35,12 +36,16 @@ const router = createBrowserRouter([
       {
         path: '/add-movie',
         element:
+        <ProtectedRoute>
           <AddMovie />,
+        </ProtectedRoute>
       },
       {
         path: '/update-movie/:id',
         element:
-          <UpdateMovie />,
+          <ProtectedRoute>
+            <UpdateMovie />
+          </ProtectedRoute>,
         loader: ({ params }) => fetch('/api/movies/' + params.id)
       },
       {
