@@ -1,12 +1,13 @@
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import film from '../assets/film.png'
 import { useState } from 'react';
 import { emailRegex, passwordRegex } from '../lib/utils';
 import { toast } from 'react-toastify';
+import { useAuth } from '../contexts/AuthContext';
 
 const Register = () => {
-    // const { signup, user, loginWithGoogle } = useAuth()
-    // const navigate = useNavigate()
+    const { signup, user, loginWithGoogle } = useAuth()
+    const navigate = useNavigate()
     const [error, setError] = useState(null)
 
 
@@ -40,18 +41,32 @@ const Register = () => {
             return
         }
 
-        // try {
-        //     await signup(email, password, name, photoUrl)
-        //     // toast.success('Account created successfully')
-        //     navigate('/')
-        // } catch (err) {
-        //     if(err.code === 'auth/email-already-in-use'){
-        //         toast.error('Email is already in use')
-        //         return
-        //     }
-        //     toast.error('Incorrect information')
-        //     // console.log(err.code)
-        // }
+        try {
+            await signup(email, password, name, photoUrl)
+            // toast.success('Account created successfully')
+            console.log('user:', user);
+            
+            navigate('/')
+        } catch (err) {
+            if(err.code === 'auth/email-already-in-use'){
+                toast.error('Email is already in use')
+                return
+            }
+            toast.error('Incorrect information')
+            // console.log(err.code)
+        }
+    }
+
+    const handleGoogleLogin = async (e) => {
+        e.preventDefault()
+
+        try {
+            await loginWithGoogle()
+            navigate('/')
+        } catch(err){
+            toast.error('Error occured while Logging in')
+            return err.message
+        }
     }
     return (
         <div className="min-h-[calc(100vh-90px)]">
@@ -79,7 +94,7 @@ const Register = () => {
                                     
                                 </fieldset>
                             </form>
-                            <button className="btn bg-white text-black border-[#e5e5e5] mt-2">
+                            <button onClick={handleGoogleLogin} className="btn bg-white text-black border-[#e5e5e5] mt-2">
                                 <svg aria-label="Google logo" width="16" height="16"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g>
                                         <path d="m0 0H512V512H0" fill="#fff"></path>

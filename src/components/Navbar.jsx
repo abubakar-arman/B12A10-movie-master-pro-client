@@ -1,8 +1,12 @@
 import React from 'react';
 import logo from '../assets/logo.png'
 import { NavLink } from 'react-router';
+import { useAuth } from '../contexts/AuthContext';
 
 const Navbar = () => {
+    const {user} = useAuth()
+    console.log(user);
+    
     const links = [
         { title: 'Home', url: '/' },
         { title: 'Movies', url: '/movies' },

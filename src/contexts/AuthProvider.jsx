@@ -67,6 +67,8 @@ export const AuthProvider = ({ children }) => {
         updateUserProfile,
         isAuthenticated: !!user
     }
+    // console.log('lll', contextValue);
+    
     return (
         <AuthContext value={contextValue}>
             {loading ? <Spinner /> : children}
