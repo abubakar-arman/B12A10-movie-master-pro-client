@@ -1,14 +1,18 @@
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import popcorn from '../assets/popcorn.png'
 import { toast } from 'react-toastify';
 import { emailRegex, passwordRegex } from '../lib/utils';
 import { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 
 const Login = () => {
+    const { login, loginWithGoogle } = useAuth()
+    const navigate = useNavigate()
+    const location = useLocation()
     const [error, setError] = useState(null)
-    
-    
-        const errText = (`Enter a valid password:
+
+    const from = location.state?.from || '/'
+    const errText = (`Enter a valid password:
         - Must have an Uppercase letter in the password 
         - Must have a Lowercase letter in the password  
         - Length must be at least 6 character 
@@ -18,8 +22,8 @@ const Login = () => {
         e.preventDefault()
         setError(null)
 
-        const email = e.target.email.value 
-        const password = e.target.password.value || null 
+        const email = e.target.email.value
+        const password = e.target.password.value || null
 
         if (!email || !password) {
             toast.error('Fill in the form correctly')
@@ -34,7 +38,27 @@ const Login = () => {
             return
         }
         // toast('pass')
+        try {
+            await login(email, password)
+            navigate(from)
+        } catch (err) {
+            toast.error('Invalid Username or Password')
+            // console.log(err.message);
+            return err.message
 
+        }
+    }
+
+    const handleGoogleLogin = async (e) => {
+        e.preventDefault()
+
+        try {
+            await loginWithGoogle()
+            navigate(from)
+        } catch (err) {
+            toast.error('Error occured while Logging in')
+            return err.message
+        }
     }
     return (
         <div className="min-h-[calc(100vh-90px)]">
@@ -58,7 +82,7 @@ const Login = () => {
                                     {/* Google */}
                                 </fieldset>
                             </form>
-                            <button className="btn bg-white text-black border-[#e5e5e5] mt-2">
+                            <button onClick={handleGoogleLogin} className="btn bg-white text-black border-[#e5e5e5] mt-2">
                                 <svg aria-label="Google logo" width="16" height="16"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><g>
                                         <path d="m0 0H512V512H0" fill="#fff"></path>
