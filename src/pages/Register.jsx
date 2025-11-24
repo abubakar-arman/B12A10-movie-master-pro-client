@@ -66,9 +66,9 @@ const Register = () => {
                             <form onSubmit={handleRegister}>
                                 <fieldset className="fieldset">
                                     <label className="label">Name</label>
-                                    <input type="text" className="input" name='name' placeholder="Arman" />
+                                    <input type="text" className="input" name='name' placeholder="Name" />
                                     <label className="label">Email</label>
-                                    <input type="email" className="input" name='email' placeholder="abc@gmail.com" />
+                                    <input type="email" className="input" name='email' placeholder="Email" />
                                     <label className="label">Password</label>
                                     <input type="password" className="input" name='password' placeholder="Password" />
                                     {error && <p className="text-red-600">* Choose a strong password of at least 6 characters with upper and lower case letters</p>}
