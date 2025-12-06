@@ -1,38 +1,89 @@
 import { useEffect } from 'react';
 import { FaImdb } from 'react-icons/fa6';
-import { Link, useLoaderData, useNavigate } from 'react-router';
+import { Link, useLoaderData, useNavigate, useParams } from 'react-router';
 import Swal from 'sweetalert2';
 import { useAuth } from '../contexts/AuthContext';
+import { toast } from 'react-toastify';
+import { useState } from 'react';
 
 const MovieDetails = () => {
-    const {isAuthenticated} = useAuth()
+    const { isAuthenticated, user } = useAuth()
     const data = useLoaderData()
     const navigate = useNavigate()
+    const { id } = useParams()
+    const [isWatchList, setIsWatchList] = useState(false)
+    // console.log('id:', id);
     // console.log(movie);
     useEffect(() => {
         // console.log(333, movie);
-        
+
         if (!data || !data.success) {
             return navigate('/movie-not-found')
         }
     }, [data, navigate])
 
+    useEffect(() => {
+        fetch('/api/watchlist?email=' + user.email, {
+            headers: {
+                authorization: 'Bearer ' + user.accessToken
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                const matched = data.result.filter(mv => mv._id === id);
+                if (matched.length)
+                    setIsWatchList(true)
+            });
+    }, [user, id])
+
+
     const movie = data?.result || {}
 
-    // const { id } = useParams()
-    // // console.log('id:', id);
 
-    // const [movie, setMovie] = useState({})
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const res = await fetch('/api/movies/' + id)
-    //         const data = await res.json()
-    //         // console.log('data:', data);
-    //         setMovie(data)
-    //     }
-    //     fetchData()
-    // }, [id])
-
+    const handleWatchlist = () => {
+        const formData = {
+            email: user.email,
+            movieId: id,
+        }
+        // console.log(formData);
+        if (!isWatchList) {
+            fetch('/api/watchlist', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    authorization: 'Bearer ' + user.accessToken
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(res => res.json())
+                .then(() => {
+                    // console.log(data);
+                    setIsWatchList(true)
+                    toast('Movie Added to Watchlater!')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        } else {
+            fetch('/api/watchlist', {
+                method: 'DELETE',
+                headers: {
+                    'content-type': 'application/json',
+                    authorization: 'Bearer ' + user.accessToken
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(res => res.json())
+                .then(() => {
+                    // console.log(data);
+                    setIsWatchList(false)
+                    toast('Movie Removed from Watchlater!')
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
+    }
     const handleDelete = () => {
         Swal.fire({
             title: "Are you sure?",
@@ -79,11 +130,11 @@ const MovieDetails = () => {
                         <p className=""><strong>Duration : </strong>{movie.duration} Minutes</p>
                     </div>
                     {isAuthenticated && <>
-                    <button className='btn btn-primary w-fit'>Add to your list</button>
-                    <div className='flex gap-5 mt-5'>
-                        <Link to={'/update-movie/' + movie._id} className="btn btn-neutral">Update</Link>
-                        <button onClick={handleDelete} className="btn btn-neutral">Delete</button>
-                    </div>
+                        <button onClick={handleWatchlist} className='btn btn-primary w-fit'>{isWatchList ? 'Remove from Watchlist' : 'Add to Watchlist'}</button>
+                        <div className='flex gap-5 mt-5'>
+                            <Link to={'/update-movie/' + movie._id} className="btn btn-neutral">Update</Link>
+                            <button onClick={handleDelete} className="btn btn-neutral">Delete</button>
+                        </div>
                     </>}
                 </div>
                 <img src={'/posters/' + movie.posterUrl} alt=""

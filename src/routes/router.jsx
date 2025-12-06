@@ -10,6 +10,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import ProtectedRoute from './ProtectedRoutes';
 import MyCollection from '../pages/MyCollection';
+import WatchList from '../pages/WatchList';
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,13 @@ const router = createBrowserRouter([
         element:
         <ProtectedRoute>
           <MyCollection />
+        </ProtectedRoute>
+      },
+      {
+        path: '/watchlist',
+        element:
+        <ProtectedRoute>
+          <WatchList />
         </ProtectedRoute>
       },
       {

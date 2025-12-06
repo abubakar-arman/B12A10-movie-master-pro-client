@@ -31,6 +31,9 @@ const Navbar = () => {
                 <li key={44}>
                     <NavLink to='/my-collection'>My Collection</NavLink>
                 </li>
+                <li key={45}>
+                    <NavLink to='/watchlist'>Watchlist</NavLink>
+                </li>
             </>
             :
             <>
