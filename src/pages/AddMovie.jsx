@@ -1,7 +1,9 @@
 import React from 'react';
 import { toast } from 'react-toastify';
+import { useAuth } from '../contexts/AuthContext';
 
 const AddMovie = () => {
+    const {user} = useAuth()
     const handleSubmit = (e) => {
         e.preventDefault()
         // console.log(e.target.title.value);
@@ -18,7 +20,7 @@ const AddMovie = () => {
             duration: e.target.duration.value,
             language: e.target.language.value,
             country: e.target.country.value,
-            addedBy: 'aa@aa.com'
+            addedBy: user.email,
         }
         // console.log(formData);
         fetch('/api/movies', {

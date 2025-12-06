@@ -4,10 +4,10 @@ import { NavLink, useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 
 const Navbar = () => {
-    const { logout, isAuthenticated, user } = useAuth()
+    const { logout, isAuthenticated } = useAuth()
     const navigate = useNavigate()
     // console.log(user);
-    
+
     // const links = [
     //     { title: 'Home', url: '/' },
     //     { title: 'Movies', url: '/movies' },
@@ -23,18 +23,24 @@ const Navbar = () => {
         <li key={2}>
             <NavLink to='/movies' >Movies</NavLink>
         </li>
-        {isAuthenticated ? <li key={4}>
-            <NavLink to='/add-movie'>Add Movie</NavLink>
-        </li> 
-        :
-         <>
-            <li key={3}>
-                <NavLink to='/login'>Login</NavLink>
-            </li>
-            <li key={4}>
-                <NavLink to='/register'>Register</NavLink>
-            </li>
-        </>}
+        {isAuthenticated ?
+            <>
+                <li key={4}>
+                    <NavLink to='/add-movie'>Add Movie</NavLink>
+                </li>
+                <li key={44}>
+                    <NavLink to='/my-collection'>My Collection</NavLink>
+                </li>
+            </>
+            :
+            <>
+                <li key={3}>
+                    <NavLink to='/login'>Login</NavLink>
+                </li>
+                <li key={4}>
+                    <NavLink to='/register'>Register</NavLink>
+                </li>
+            </>}
     </>
 
     const handleLogout = () => {

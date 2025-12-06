@@ -9,6 +9,7 @@ import NotFound from '../pages/NotFound';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import ProtectedRoute from './ProtectedRoutes';
+import MyCollection from '../pages/MyCollection';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,13 @@ const router = createBrowserRouter([
             <UpdateMovie />
           </ProtectedRoute>,
         loader: ({ params }) => fetch('/api/movies/' + params.id)
+      },
+      {
+        path: '/my-collection',
+        element:
+        <ProtectedRoute>
+          <MyCollection />
+        </ProtectedRoute>
       },
       {
         path: '/login',
