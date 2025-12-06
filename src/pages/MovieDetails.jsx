@@ -1,18 +1,24 @@
 import { useEffect } from 'react';
 import { FaImdb } from 'react-icons/fa6';
-import { Link, useLoaderData, useNavigate} from 'react-router';
+import { Link, useLoaderData, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
+import { useAuth } from '../contexts/AuthContext';
 
 const MovieDetails = () => {
-    const movie = useLoaderData()
+    const {isAuthenticated} = useAuth()
+    const data = useLoaderData()
     const navigate = useNavigate()
-    
+    // console.log(movie);
     useEffect(() => {
-        if(!movie){
-            navigate('/movie-not-found')
+        // console.log(333, movie);
+        
+        if (!data || !data.success) {
+            return navigate('/movie-not-found')
         }
-    }, [movie, navigate])
-    
+    }, [data, navigate])
+
+    const movie = data?.result || {}
+
     // const { id } = useParams()
     // // console.log('id:', id);
 
@@ -38,19 +44,19 @@ const MovieDetails = () => {
             confirmButtonText: "Yes"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch('/api/movies/'+movie._id, {
+                fetch('/api/movies/' + movie._id, {
                     method: 'DELETE'
                 })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    navigate(-1, {replace: true})
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"
-                    });
-                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        navigate(-1, { replace: true })
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                        });
+                    })
             }
         });
     }
@@ -72,11 +78,13 @@ const MovieDetails = () => {
                         <p className=""><strong>Cast : </strong>{movie.cast}</p>
                         <p className=""><strong>Duration : </strong>{movie.duration} Minutes</p>
                     </div>
+                    {isAuthenticated && <>
                     <button className='btn btn-primary w-fit'>Add to your list</button>
                     <div className='flex gap-5 mt-5'>
                         <Link to={'/update-movie/' + movie._id} className="btn btn-neutral">Update</Link>
                         <button onClick={handleDelete} className="btn btn-neutral">Delete</button>
                     </div>
+                    </>}
                 </div>
                 <img src={'/posters/' + movie.posterUrl} alt=""
                     className='w-3/12 object-cover' />

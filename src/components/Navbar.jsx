@@ -6,7 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 const Navbar = () => {
     const { logout, isAuthenticated, user } = useAuth()
     const navigate = useNavigate()
-    console.log(user);
+    // console.log(user);
     
     // const links = [
     //     { title: 'Home', url: '/' },
