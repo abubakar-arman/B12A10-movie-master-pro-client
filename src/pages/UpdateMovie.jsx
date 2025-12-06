@@ -1,10 +1,21 @@
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
+import { useAuth } from '../contexts/AuthContext';
+import { useEffect } from 'react';
 
 const UpdateMovie = () => {
-    const movie = useLoaderData()
+    const data = useLoaderData()
+    const { user } = useAuth()
+    const navigate = useNavigate()
     // console.log(movie);
-    
+
+    useEffect(() => {
+        if (!data || !data.success) {
+            return navigate('/movie-not-found')
+        }
+    }, [data, navigate])
+    const movie = data?.result || {}
+
     const handleSubmit = (e) => {
         e.preventDefault()
         // console.log(e.target.title.value);
@@ -23,23 +34,25 @@ const UpdateMovie = () => {
             country: e.target.country.value,
         }
         // console.log(formData);
-        fetch('/api/movies/'+movie._id, {
+        fetch('/api/movies/' + movie._id, {
             method: 'PUT',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: 'Bearer ' + user.accessToken
             },
             body: JSON.stringify(formData)
         })
-        .then(res => res.json())
-        .then((data) => {
-            console.log(data);
-            // e.target.reset()
-            toast('Movie Updated Successfully!')
-        })
-        .catch(err => {
-            console.log(err)
-        })
-        
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data);
+                // e.target.reset()
+                toast('Movie Updated Successfully!')
+                navigate(-1)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
     }
     return (
         <div className='flex flex-col items-center mt-10 mb-10'>
