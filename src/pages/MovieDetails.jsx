@@ -12,6 +12,7 @@ const MovieDetails = () => {
     const navigate = useNavigate()
     const { id } = useParams()
     const [isWatchList, setIsWatchList] = useState(false)
+    const [movieOwner, setMovieOwner] = useState(false)
     // console.log('id:', id);
     // console.log(movie);
     useEffect(() => {
@@ -36,9 +37,20 @@ const MovieDetails = () => {
             });
     }, [user, id])
 
+    useEffect(() => {
+        const movie = data?.result || {}
+        if (movie.addedBy === user.email) {
+        setMovieOwner(true)
+    } else {
+        setMovieOwner(false)
+    }
+    },[data, user])
+
 
     const movie = data?.result || {}
-
+    // console.log(222,movie);
+    
+    
 
     const handleWatchlist = () => {
         const formData = {
@@ -131,10 +143,12 @@ const MovieDetails = () => {
                     </div>
                     {isAuthenticated && <>
                         <button onClick={handleWatchlist} className='btn btn-primary w-fit'>{isWatchList ? 'Remove from Watchlist' : 'Add to Watchlist'}</button>
-                        <div className='flex gap-5 mt-5'>
-                            <Link to={'/update-movie/' + movie._id} className="btn btn-neutral">Update</Link>
-                            <button onClick={handleDelete} className="btn btn-neutral">Delete</button>
-                        </div>
+                        {movieOwner &&
+                            <div className='flex gap-5 mt-5'>
+                                <Link to={'/update-movie/' + movie._id} className="btn btn-neutral">Update</Link>
+                                <button onClick={handleDelete} className="btn btn-neutral">Delete</button>
+                            </div>
+                        }
                     </>}
                 </div>
                 <img src={'/posters/' + movie.posterUrl} alt=""
