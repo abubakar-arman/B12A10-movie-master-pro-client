@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 
 const Navbar = () => {
-    const { logout, isAuthenticated } = useAuth()
+    const { logout, isAuthenticated, user } = useAuth()
     const navigate = useNavigate()
     // console.log(user);
 
@@ -50,6 +50,8 @@ const Navbar = () => {
         logout();
         navigate('/')
     }
+    console.log(333, user);
+    
 
     return (
         <div className="navbar bg-base-100 shadow-sm lg:px-10">
@@ -75,12 +77,24 @@ const Navbar = () => {
                 </ul>
             </div>
             {isAuthenticated && <div className="navbar-end">
-                <div className="avatar mr-4">
-                    <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring-2 ring-offset-2">
-                        <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+                <div className="dropdown">
+
+                    <div tabIndex={0} role='button' className="avatar mr-4">
+                        <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring-2 ring-offset-2">
+                            <img src={user.photoURL} />
+                        </div>
+                    </div>
+                    <div
+                        tabIndex={0}
+                        className="dropdown-content card card-sm bg-base-100 z-100 w-64 shadow-md right-0">
+                        <div className="card-body">
+                            <p className='font-semibold text-xl'>{user.displayName}</p>
+                            <p>Email : {user.email}</p>
+                            <button onClick={handleLogout} className="btn bg-red-700 text-base-100">Logout</button>
+                        </div>
                     </div>
                 </div>
-                <button onClick={handleLogout} className="btn bg-red-700 text-base-100">Logout</button>
+
             </div>}
         </div>
     );
