@@ -3,7 +3,7 @@ import React from 'react';
 const About = () => {
     return (
         <div className='flex flex-col items-center mt-10 mb-10 px-20'>
-            <h3 className='text-3xl font-bold text-accent-content mb-5'>MovieMaster Pro: The Ultimate Cinematic Experience</h3>
+            <h3 className='text-3xl font-bold text-accent-content text-center mb-5'>MovieMaster Pro: The Ultimate Cinematic Experience</h3>
             <p className="text-center text-accent-content/70">MovieMaster Pro is a premium, subscription-based streaming
                 platform dedicated exclusively to cinematic content. It offers a vast,
                 meticulously curated library ranging from Hollywood blockbusters and

@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../assets/logo.png'
-import { NavLink, useNavigate } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -75,14 +75,15 @@ const Navbar = () => {
                     </div>
                     <ul
                         tabIndex="-1"
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow font-bold">
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-2 mt-3 w-52 p-2 shadow font-bold">
                         {navLinks}
 
                     </ul>
                 </div>
-                <a className="">
-                    <img src={logo} alt="" className='w-36' />
-                </a>
+                <Link to='/' className="flex items-center font-extrabold text-primary">
+                    <img src={logo} alt="" className='w-20' />
+                    <p>MovieMaster Pro</p>
+                </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 font-bold">

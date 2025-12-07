@@ -131,9 +131,14 @@ const MovieDetails = () => {
 
     return (
         <div className='mt-10 mb-10 px-20'>
-            <div className="flex">
-                <div className="w-8/12 flex flex-col gap-5">
+            <div className="lg:flex lg:flex-row-reverse">
+                <img src={'/posters/' + movie.posterUrl} alt=""
+                    className='w-3/12 object-cover hidden lg:block' />
+                <div className="lg:w-8/12 flex flex-col gap-5">
                     <h2 className="text-6xl font-bold">{movie.title}</h2>
+                    
+                <img src={'/posters/' + movie.posterUrl} alt=""
+                    className='w-11/12 object-cover lg:hidden' />
                     <div className="flex items-center gap-2">
                         <div className="ring-2 ring-primary rounded-full p-2 font-bold size-10">{movie.rating}</div>
                         <FaImdb className='bg-yellow-400 text-black size-8' />
@@ -156,8 +161,6 @@ const MovieDetails = () => {
                         }
                     </>}
                 </div>
-                <img src={'/posters/' + movie.posterUrl} alt=""
-                    className='w-3/12 object-cover' />
             </div>
         </div>
     );

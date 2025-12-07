@@ -6,7 +6,8 @@ import { FaFacebookSquare } from "react-icons/fa";
 const Footer = () => {
     return (
         <>
-            <footer className="footer sm:footer-horizontal bg-base-300 text-base-content p-10">
+            <footer className="footer grid grid-cols-1 lg:grid-cols-4 place-items-center sm:footer-horizontal bg-base-300 
+             text-base-content p-10">
                 <nav>
                     <h6 className="footer-title">Support</h6>
                     <a className="link link-hover">FAQ</a>

@@ -115,8 +115,8 @@ const AllMovies = () => {
                 </form>
 
                 <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn btn-primary">Filter</div>
-                    <div tabIndex={0} className="dropdown-content card card-sm bg-base-100 z-10 w-72 shadow-md">
+                    <div tabIndex={0} role="button" className="btn btn-primary ml-8">Filter</div>
+                    <div tabIndex={0} className="dropdown-content card card-sm bg-base-100 z-10 right-0 w-72 shadow-md">
                         <div className="card-body">
                             <div>
                                 <h4 className="font-bold mb-3">Genres</h4>
@@ -149,7 +149,7 @@ const AllMovies = () => {
                     </div>
                 </div>
             </div>
-            <div className="cards grid grid-cols-4 gap-10 px-20">
+            <div className="cards grid grid-cols-1 lg:grid-cols-4 gap-10 px-20">
                 {isLoading ? <Spinner /> :
                     movies.map((movie, i) => (
                         <div onClick={() => handleCardClick(movie._id)} key={i} className="card bg-base-100 w-72 shadow-sm">

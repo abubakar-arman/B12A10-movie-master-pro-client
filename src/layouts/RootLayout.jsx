@@ -17,7 +17,7 @@ const RootLayout = () => {
             </ErrorBoundary>
             <Footer />
             <ToastContainer
-                position="top-right"
+                position="bottom-right"
                 autoClose={4000}
                 hideProgressBar={false}
                 newestOnTop={false}
