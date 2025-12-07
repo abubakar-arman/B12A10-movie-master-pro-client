@@ -15,6 +15,7 @@ const MovieDetails = () => {
     const [movieOwner, setMovieOwner] = useState(false)
     // console.log('id:', id);
     // console.log(movie);
+    
     useEffect(() => {
         // console.log(333, movie);
 
@@ -24,6 +25,8 @@ const MovieDetails = () => {
     }, [data, navigate])
 
     useEffect(() => {
+        if(!user) return
+        
         fetch('/api/watchlist?email=' + user.email, {
             headers: {
                 authorization: 'Bearer ' + user.accessToken
@@ -38,6 +41,7 @@ const MovieDetails = () => {
     }, [user, id])
 
     useEffect(() => {
+        if(!user) return        
         const movie = data?.result || {}
         if (movie.addedBy === user.email) {
         setMovieOwner(true)
@@ -53,6 +57,7 @@ const MovieDetails = () => {
     
 
     const handleWatchlist = () => {
+        if(!user) return
         const formData = {
             email: user.email,
             movieId: id,

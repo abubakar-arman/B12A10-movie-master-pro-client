@@ -3,6 +3,8 @@
   themes: light --default, dark --prefersdark, synthwave, forest, night;
 }
 
+@custom-variant dark (&where([data-theme=dark], [data-theme=dark] *);)
+
 a.active {
   @apply text-red-700 border-b-4
 }
