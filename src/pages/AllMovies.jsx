@@ -149,7 +149,7 @@ const AllMovies = () => {
                     </div>
                 </div>
             </div>
-            <div className="cards grid grid-cols-1 lg:grid-cols-4 gap-10 px-20">
+            <div className="cards grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 px-20">
                 {isLoading ? <Spinner /> :
                     movies.map((movie, i) => (
                         <div onClick={() => handleCardClick(movie._id)} key={i} className="card bg-base-100 w-72 shadow-sm">

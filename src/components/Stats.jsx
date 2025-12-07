@@ -2,7 +2,7 @@ import React from 'react';
 
 const Stats = ({movies}) => {
     return (
-        <div className='flex flex-col items-center mt-10 mb-10' data-aos='slide-up' >
+        <div className='flex flex-col items-center mt-10 mb-10' data-aos='fade-right' >
             <h3 className='text-3xl font-bold text-accent-content'>Stats</h3>
             <div className="stats stats-vertical lg:stats-horizontal shadow w-lg text-center 
             bg-warning text-accent-content mt-5">

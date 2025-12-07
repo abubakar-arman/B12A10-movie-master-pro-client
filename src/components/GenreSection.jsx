@@ -3,7 +3,7 @@ import React from 'react';
 const GenreSection = () => {
     const genres = ['Sci-Fi', 'Action', 'Romance', 'Drama', 'Thriller', 'Animation', 'Crime']
     return (
-        <div className='flex flex-col items-center mt-10 mb-10 px-20'>
+        <div className='flex flex-col items-center mt-10 mb-10 px-20' data-aos='flip-right'>
             <h3 className='text-3xl font-bold text-accent-content'>Genres</h3>
             <div className="lg:flex space-y-1 lg:space-y-0 gap-1 shadow w-full text-center 
             text-accent-content mt-5">
