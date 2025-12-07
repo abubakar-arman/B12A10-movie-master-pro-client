@@ -7,29 +7,29 @@ import ErrorBoundary from '../components/ErrorBoundary';
 
 const RootLayout = () => {
     return (
-        <ErrorBoundary>
-            <div className='bg-base-200'>
-                <ScrollRestoration />
-                <Navbar />
+        <div className='bg-base-200'>
+            <ScrollRestoration />
+            <Navbar />
+            <ErrorBoundary>
                 <main>
                     <Outlet />
                 </main>
-                <Footer />
-                <ToastContainer
-                    position="top-right"
-                    autoClose={4000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick={false}
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="light"
-                    transition={Bounce}
-                />
-            </div>
-        </ErrorBoundary>
+            </ErrorBoundary>
+            <Footer />
+            <ToastContainer
+                position="top-right"
+                autoClose={4000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition={Bounce}
+            />
+        </div>
     );
 };
 

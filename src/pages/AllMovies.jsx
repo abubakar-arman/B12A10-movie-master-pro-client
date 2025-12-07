@@ -5,6 +5,7 @@ import { FaStar } from 'react-icons/fa6';
 import { useNavigate } from 'react-router';
 import Spinner from '../components/Spinner'
 
+
 const AllMovies = () => {
     const [movies, setMovies] = useState([])
     // const data = useLoaderData()
@@ -12,6 +13,9 @@ const AllMovies = () => {
     const navigate = useNavigate()
     // const [searchKey, setSearchKey] = useState('')
     const [isLoading, setIsLoading] = useState(true)
+    const [selectedGenres, setSelectedGenres] = useState([])
+    const [minRating, setMinRating] = useState(0)
+    const [maxRating, setMaxRating] = useState(0)
 
     useEffect(() => {
         fetch('/api/movies')
@@ -49,30 +53,102 @@ const AllMovies = () => {
 
     }
 
+    const fetchMovies = (genres = [], min = 0, max = 10) => {
+        setIsLoading(true)
+
+        const params = new URLSearchParams()
+        if (genres.length > 0) params.append('genres', genres.join(','))
+        params.append('minRating', min)
+        params.append('maxRating', max)
+
+        fetch(`/api/movies?${params}`)
+            .then(res => res.json())
+            .then(data => {
+                setMovies(data)
+                setIsLoading(false)
+            })
+            .catch(err => {
+                console.error(err)
+                setIsLoading(false)
+            })
+    }
+
+    const handleGenreChange = (genre) => {
+        const updated = selectedGenres.includes(genre)
+            ? selectedGenres.filter(g => g !== genre)
+            : [...selectedGenres, genre]
+
+        setSelectedGenres(updated)
+        fetchMovies(updated, minRating, maxRating)
+    }
+
+    const handleRatingChange = (e) => {
+        const value = parseInt(e.target.value)
+        setMaxRating(value)
+        fetchMovies(selectedGenres, minRating, value)
+    }
+
     // if (isLoading) {
     //     return <Spinner />
     // }
     return (
         <div className='mt-10 mb-10 text-center'>
             <h3 className='text-3xl font-bold text-accent-content mb-5'>All Movies</h3>
-            <form onSubmit={handleSearch} className='mb-5'>
-                <label className="input">
-                    <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <g
-                            strokeLinejoin="round"
-                            strokeLinecap="round"
-                            strokeWidth="2.5"
-                            fill="none"
-                            stroke="currentColor"
-                        >
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="m21 21-4.3-4.3"></path>
-                        </g>
-                    </svg>
-                    <input name="search" type="search" placeholder="Search" />
-                </label>
-                <button className='btn btn-warning ml-4 '>Search</button>
-            </form>
+            <div className="flex justify-center">
+                <form onSubmit={handleSearch} className='mb-5 flex'>
+                    <label className="input">
+                        <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <g
+                                strokeLinejoin="round"
+                                strokeLinecap="round"
+                                strokeWidth="2.5"
+                                fill="none"
+                                stroke="currentColor"
+                            >
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.3-4.3"></path>
+                            </g>
+                        </svg>
+                        <input name="search" type="search" placeholder="Search" />
+                    </label>
+                    <button className='btn btn-warning ml-4 '>Search</button>
+                </form>
+
+                <div className="dropdown">
+                    <div tabIndex={0} role="button" className="btn btn-primary">Filter</div>
+                    <div tabIndex={0} className="dropdown-content card card-sm bg-base-100 z-10 w-72 shadow-md">
+                        <div className="card-body">
+                            <div>
+                                <h4 className="font-bold mb-3">Genres</h4>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                    {['Sci-Fi', 'Action', 'Animation', 'Drama', 'Comedy'].map(genre => (
+                                        <label key={genre}>
+                                            <input
+                                                type="checkbox"
+                                                checked={selectedGenres.includes(genre)}
+                                                onChange={() => handleGenreChange(genre)}
+                                            />
+                                            {genre}
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="mt-4">
+                                <h4 className="font-bold mb-3">Rating: {maxRating}</h4>
+                                <input
+                                    type="range"
+                                    min="0"
+                                    max="10"
+                                    value={maxRating}
+                                    onChange={handleRatingChange}
+                                    className="range range-sm"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className="cards grid grid-cols-4 gap-10 px-20">
                 {isLoading ? <Spinner /> :
                     movies.map((movie, i) => (
