@@ -25,7 +25,7 @@ const MovieDetails = () => {
     }, [data, navigate])
 
     useEffect(() => {
-        if(!user) return
+        // if(!user) return
         
         fetch('/api/watchlist?email=' + user.email, {
             headers: {
