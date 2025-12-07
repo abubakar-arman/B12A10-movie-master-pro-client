@@ -21,6 +21,7 @@ const AddMovie = () => {
             language: e.target.language.value,
             country: e.target.country.value,
             addedBy: user.email,
+            createdAt: new Date().toISOString(),
         }
         // console.log(formData);
         fetch('/api/movies', {

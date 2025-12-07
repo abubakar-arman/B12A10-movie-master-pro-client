@@ -23,7 +23,7 @@ const Home = () => {
             <Hero />
             <Stats movies={movies} />
             <TopRatedMovies movies={movies} />
-            <LatestMovies movies={movies} />
+            <LatestMovies/>
             <GenreSection />
             <About />
         </div>

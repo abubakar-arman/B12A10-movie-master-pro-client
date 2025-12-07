@@ -150,6 +150,8 @@ const MovieDetails = () => {
                         <p className=""><strong>Director : </strong>{movie.director}</p>
                         <p className=""><strong>Cast : </strong>{movie.cast}</p>
                         <p className=""><strong>Duration : </strong>{movie.duration} Minutes</p>
+                        <p className=""><strong>Added By : </strong>{movie.addedBy}</p>
+                        <p className=""><strong>Added at : </strong>{movie.createdAt}</p>
                     </div>
                     {isAuthenticated && <>
                         <button onClick={handleWatchlist} className='btn btn-primary w-fit'>{isWatchList ? 'Remove from Watchlist' : 'Add to Watchlist'}</button>

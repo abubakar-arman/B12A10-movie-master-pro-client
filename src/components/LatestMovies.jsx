@@ -1,10 +1,17 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { FaStar } from 'react-icons/fa6';
 import { useNavigate } from 'react-router';
 
-const LatestMovies = ({ movies }) => {
-    // console.log(movies);
-    const latestMovies = movies.sort((a, b) => b.releaseYear - a.releaseYear).slice(0, 6)
+const LatestMovies = () => {
+    const [movies, setMovies] = useState([])
+    useEffect(() => {
+        fetch('/api/latest-movies')
+        .then(res => res.json())
+        .then(data => setMovies(data) )
+    }, [])
+    console.log(movies);
     const navigate = useNavigate()
 
     const handleCardClick = (id) => {
@@ -16,7 +23,7 @@ const LatestMovies = ({ movies }) => {
             <h3 className='text-3xl font-bold text-accent-content mb-5'>Latest</h3>
             <div className="cards grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 lg:gap-8 space-y-8 lg:space-y-0 px-20">
                 {
-                    latestMovies.map((movie, i) => (
+                    movies.map((movie, i) => (
                         <div key={i} className="card bg-base-100 shadow-sm" onClick={() => handleCardClick(movie._id)}>
                             <figure className='relative overflow-hidden rounded-lg group'>
                                 <img
