@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { useAuth } from '../contexts/AuthContext';
 
 const AddMovie = () => {
-    const {user} = useAuth()
+    const { user } = useAuth()
     const handleSubmit = (e) => {
         e.preventDefault()
         // console.log(e.target.title.value);
@@ -23,24 +23,36 @@ const AddMovie = () => {
             addedBy: user.email,
             createdAt: new Date().toISOString(),
         }
+        
+        const requiredFields = [
+            'title', 'genre', 'releaseYear', 'director', 'cast',
+            'posterUrl', 'plotSummary', 'rating', 'duration', 'language', 'country'
+        ];
+
+        const emptyField = requiredFields.find(field => !formData[field] || formData[field].trim() === '');
+
+        if (emptyField) {
+            toast.error(`Please fill in the ${emptyField} field`);
+            return;
+        }
         // console.log(formData);
-        fetch('/api/movies', {
+        fetch('https://moviemaster-pro.vercel.app/movies', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(formData)
         })
-        .then(res => res.json())
-        .then(() => {
-            // console.log(data);
-            e.target.reset()
-            toast('Movie Added Successfully!')
-        })
-        .catch(err => {
-            console.log(err)
-        })
-        
+            .then(res => res.json())
+            .then(() => {
+                // console.log(data);
+                e.target.reset()
+                toast('Movie Added Successfully!')
+            })
+            .catch(err => {
+                // console.log(err)
+            })
+
     }
     return (
         <div className='flex flex-col items-center mt-10 mb-10'>

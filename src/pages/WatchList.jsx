@@ -4,21 +4,30 @@ import { FaStar } from 'react-icons/fa6';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 import { useState } from 'react';
+import Spinner from '../components/Spinner';
 
 const WatchList = () => {
     // console.log(movies);
     const navigate = useNavigate()
     const { user } = useAuth()
     const [movies, setMovies] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch('/api/watchlist?email=' + user.email, {
-            headers: {
-                authorization: 'Bearer ' + user.accessToken
-            }
-        })
-            .then(res => res.json())
-            .then(data => setMovies(data?.result || []));
+        const fetchData = () => {
+            setLoading(true)
+            fetch('https://moviemaster-pro.vercel.app/watchlist?email=' + user.email, {
+                headers: {
+                    authorization: 'Bearer ' + user.accessToken
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setMovies(data?.result || [])
+                    setLoading(false)
+                });
+        }
+        fetchData()
     }, [user])
 
     const handleCardClick = (id) => {
@@ -27,9 +36,10 @@ const WatchList = () => {
     return (
         <div className='mt-10 mb-10 text-center'>
             <h3 className='text-3xl font-bold text-accent-content mb-5'>Watchlist</h3>
-            { movies.length === 0 ?
-            <div className="">You have no movies in watchlist</div>
-            :
+            {loading ? <Spinner /> : 
+            movies.length === 0 ?
+                <div className="">You have no movies in watchlist</div>
+                :
                 <div className="cards grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 px-20">
                     {
                         movies.map((movie, i) => (

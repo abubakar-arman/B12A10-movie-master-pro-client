@@ -18,7 +18,7 @@ const AllMovies = () => {
     const [maxRating, setMaxRating] = useState(0)
 
     useEffect(() => {
-        fetch('/api/movies')
+        fetch('https://moviemaster-pro.vercel.app/movies')
             .then(res => res.json())
             .then(data => {
                 setIsLoading(false)
@@ -36,7 +36,7 @@ const AllMovies = () => {
         const searchKey = e.target.search.value
 
         setIsLoading(true)
-        fetch('/api/search?searchKey=' + searchKey, {
+        fetch('https://moviemaster-pro.vercel.app/search?searchKey=' + searchKey, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -61,7 +61,7 @@ const AllMovies = () => {
         params.append('minRating', min)
         params.append('maxRating', max)
 
-        fetch(`/api/movies?${params}`)
+        fetch(`https://moviemaster-pro.vercel.app/movies?${params}`)
             .then(res => res.json())
             .then(data => {
                 setMovies(data)

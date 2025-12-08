@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         index: true,
         element:
           <Home />,
-        loader: () => fetch('/api/movies')
+        loader: () => fetch('https://moviemaster-pro.vercel.app/movies')
       },
       {
         path: '/movies',
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
         path: '/movie-details/:id',
         element:
           <MovieDetails />,
-        loader: ({ params }) => fetch('/api/movies/' + params.id)
+        loader: ({ params }) => fetch('https://moviemaster-pro.vercel.app/movies/' + params.id)
       },
       {
         path: '/add-movie',
@@ -47,7 +47,7 @@ const router = createBrowserRouter([
           <ProtectedRoute>
             <UpdateMovie />
           </ProtectedRoute>,
-        loader: ({ params }) => fetch('/api/movies/' + params.id)
+        loader: ({ params }) => fetch('https://moviemaster-pro.vercel.app/movies/' + params.id)
       },
       {
         path: '/my-collection',

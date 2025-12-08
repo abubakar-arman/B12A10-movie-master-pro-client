@@ -19,7 +19,7 @@ const Hero = () => {
         // console.log(2222);
         const fetchData = async () => {
             // setIsLoading(true)
-            const res = await fetch('http://localhost:3000/movies/featured')
+            const res = await fetch('https://moviemaster-pro.vercel.app/movies/featured')
             const data = await res.json()
             // console.log(data);
             setMovies(data)

@@ -34,7 +34,7 @@ const UpdateMovie = () => {
             country: e.target.country.value,
         }
         // console.log(formData);
-        fetch('/api/movies/' + movie._id, {
+        fetch('https://moviemaster-pro.vercel.app/movies/' + movie._id, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
@@ -44,13 +44,13 @@ const UpdateMovie = () => {
         })
             .then(res => res.json())
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 // e.target.reset()
                 toast('Movie Updated Successfully!')
                 navigate(-1)
             })
             .catch(err => {
-                console.log(err)
+                // console.log(err)
             })
 
     }

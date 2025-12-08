@@ -44,7 +44,7 @@ const Register = () => {
         try {
             await signup(email, password, name, photoUrl)
             // toast.success('Account created successfully')
-            console.log('user:', user);
+            // console.log('user:', user);
             
             navigate('/')
         } catch (err) {

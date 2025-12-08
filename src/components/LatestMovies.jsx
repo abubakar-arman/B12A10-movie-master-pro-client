@@ -7,11 +7,11 @@ import { useNavigate } from 'react-router';
 const LatestMovies = () => {
     const [movies, setMovies] = useState([])
     useEffect(() => {
-        fetch('/api/latest-movies')
+        fetch('https://moviemaster-pro.vercel.app/latest-movies')
         .then(res => res.json())
         .then(data => setMovies(data) )
     }, [])
-    console.log(movies);
+    // console.log(movies);
     const navigate = useNavigate()
 
     const handleCardClick = (id) => {

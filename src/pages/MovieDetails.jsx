@@ -15,7 +15,7 @@ const MovieDetails = () => {
     const [movieOwner, setMovieOwner] = useState(false)
     // console.log('id:', id);
     // console.log(movie);
-    
+
     useEffect(() => {
         // console.log(333, movie);
 
@@ -25,46 +25,42 @@ const MovieDetails = () => {
     }, [data, navigate])
 
     useEffect(() => {
-        if(!user) return
-        
-        fetch('/api/watchlist?email=' + user.email, {
+        if (!user) return
+
+        fetch('https://moviemaster-pro.vercel.app/watchlist?email=' + user.email, {
             headers: {
                 authorization: 'Bearer ' + user.accessToken
             }
         })
-            .then(res => res.json())
-            .then(data => {
+        .then(res => res.json())
+        .then(data => {
                 const matched = data.result.filter(mv => mv._id === id);
                 if (matched.length)
                     setIsWatchList(true)
+            })
+            .catch(err => {
+                console.log(err);
+
             });
     }, [user, id])
-
-    useEffect(() => {
-        if(!user) return        
-        const movie = data?.result || {}
-        if (movie.addedBy === user.email) {
-        setMovieOwner(true)
-    } else {
-        setMovieOwner(false)
-    }
-    },[data, user])
 
 
     const movie = data?.result || {}
     // console.log(222,movie);
-    
-    
+
+
 
     const handleWatchlist = () => {
-        if(!user) return
+        if (!user) return
         const formData = {
             email: user.email,
             movieId: id,
         }
         // console.log(formData);
         if (!isWatchList) {
-            fetch('/api/watchlist', {
+
+            // console.log(222, isWatchList)
+            fetch('https://moviemaster-pro.vercel.app/watchlist', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -79,10 +75,10 @@ const MovieDetails = () => {
                     toast('Movie Added to Watchlater!')
                 })
                 .catch(err => {
-                    console.log(err)
+                    // console.log(err)
                 })
         } else {
-            fetch('/api/watchlist', {
+            fetch('https://moviemaster-pro.vercel.app/watchlist', {
                 method: 'DELETE',
                 headers: {
                     'content-type': 'application/json',
@@ -97,7 +93,7 @@ const MovieDetails = () => {
                     toast('Movie Removed from Watchlater!')
                 })
                 .catch(err => {
-                    console.log(err)
+                    // console.log(err)
                 })
         }
     }
@@ -112,12 +108,12 @@ const MovieDetails = () => {
             confirmButtonText: "Yes"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch('/api/movies/' + movie._id, {
+                fetch('https://moviemaster-pro.vercel.app/movies/' + movie._id, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data);
+                        // console.log(data);
                         navigate(-1, { replace: true })
                         Swal.fire({
                             title: "Deleted!",
@@ -136,9 +132,9 @@ const MovieDetails = () => {
                     className='w-3/12 object-cover hidden lg:block' />
                 <div className="lg:w-8/12 flex flex-col gap-5">
                     <h2 className="text-6xl font-bold">{movie.title}</h2>
-                    
-                <img src={'/posters/' + movie.posterUrl} alt=""
-                    className='w-11/12 object-cover lg:hidden' />
+
+                    <img src={'/posters/' + movie.posterUrl} alt=""
+                        className='w-11/12 object-cover lg:hidden' />
                     <div className="flex items-center gap-2">
                         <div className="ring-2 ring-primary rounded-full p-2 font-bold size-10">{movie.rating}</div>
                         <FaImdb className='bg-yellow-400 text-black size-8' />
@@ -155,7 +151,7 @@ const MovieDetails = () => {
                     </div>
                     {isAuthenticated && <>
                         <button onClick={handleWatchlist} className='btn btn-primary w-fit'>{isWatchList ? 'Remove from Watchlist' : 'Add to Watchlist'}</button>
-                        {movieOwner &&
+                        {movie.addedBy === user.email &&
                             <div className='flex gap-5 mt-5'>
                                 <Link to={'/update-movie/' + movie._id} className="btn btn-neutral">Update</Link>
                                 <button onClick={handleDelete} className="btn btn-neutral">Delete</button>
